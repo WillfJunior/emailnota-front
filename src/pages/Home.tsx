@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import baseUri from '../services/api';
+import Alert from '@mui/material/Alert';
 import { useEffect, useState } from 'react';
 
 type Clientes = {
@@ -17,6 +18,7 @@ export default function Home() {
     const [clientes, setClientes] = useState<Clientes[]>([]);
     const [selectedValue, setSelectedValue] = useState("");
     const [text, setText] = useState("");
+    const [success, setSuccess] = useState(false);
 
 
     useEffect(() => {
@@ -57,17 +59,23 @@ export default function Home() {
             .then((response) => response.json())
             .then((json) => {
                 console.log(json)
+                setSuccess(true);
+                setText('');
+                setSelectedValue('');
                 
     
             })
             .catch((error) => {
                 console.error(error);
             });
-            console.log(notas);
+            setTimeout(() => {
+                setSuccess(false);
+            }, 3000);
             
-            alert('Nota enviada com sucesso!');
-            setText('');
-            setSelectedValue('');
+            
+            
+            
+            
         
         
         
@@ -107,6 +115,8 @@ export default function Home() {
             <Button variant="contained" color="success" onClick={handleEmail} >
                 Enviar
             </Button>
+
+            { success ? <Alert severity="success">Nota enviada com sucesso!</Alert> : <></>}
             
             </Stack>
         </>
