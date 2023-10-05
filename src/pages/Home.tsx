@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import baseUri from '../services/api';
-import Alert from '@mui/material/Alert';
+// import Alert from '@mui/material/Alert';
 import { useEffect, useState } from 'react';
 
 type Clientes = {
@@ -18,7 +18,8 @@ export default function Home() {
     const [clientes, setClientes] = useState<Clientes[]>([]);
     const [selectedValue, setSelectedValue] = useState("");
     const [text, setText] = useState("");
-    const [success, setSuccess] = useState(false);
+    // const [success, setSuccess] = useState(false);
+    const [chave, setChave] = useState("");
 
 
     useEffect(() => {
@@ -40,40 +41,47 @@ export default function Home() {
     }
     
     function handleEmail() {
-        
-
-
-        const notas = {
-            "clienteId": selectedValue,
-            "valor": text,
+        console.log(import.meta.env.VITE_SECRET)
+        if(chave !== import.meta.env.VITE_SECRET){
+            alert('Chave inválida! \n Email Não enviado....');
+            setText('');
+            setSelectedValue('');
+            setChave('');
+            return;
         }
 
+        // const notas = {
+        //     "clienteId": selectedValue,
+        //     "valor": text,
+        // }
+
         
-            fetch(`${baseUri}notas`,{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(notas)
-            })
-            .then((response) => response.json())
-            .then((json) => {
-                console.log(json)
-                setSuccess(true);
-                setText('');
-                setSelectedValue('');
+        //     fetch(`${baseUri}notas`,{
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //         body: JSON.stringify(notas)
+        //     })
+        //     .then((response) => response.json())
+        //     .then((json) => {
+        //         console.log(json)
+        //         setSuccess(true);
+        //         setText('');
+        //         setSelectedValue('');
+        //         setChave('');
                 
     
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-            setTimeout(() => {
-                setSuccess(false);
-            }, 3000);
+        //     })
+        //     .catch((error) => {
+        //         console.error(error);
+        //     });
+        //     setTimeout(() => {
+        //         setSuccess(false);
+        //     }, 3000);
             
             
-            
+            alert('Email enviado com sucesso!');
             
             
         
@@ -90,6 +98,9 @@ export default function Home() {
                 id="outlined-select-currency"
                 select
                 label="Selecione o cliente"
+                InputLabelProps={{
+                    shrink: true,
+                }}
                 value={selectedValue}
                 onChange={(event) => setSelectedValue(event.target.value)}
 
@@ -112,11 +123,23 @@ export default function Home() {
 
             />
 
+            <TextField
+                    required
+                    id="outlined-required"
+                    label="Chave Secreta"
+                    type='password'
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    value={chave}
+                    onChange={(event) => setChave(event.target.value)}
+            />
+
             <Button variant="contained" color="success" onClick={handleEmail} >
                 Enviar
             </Button>
 
-            { success ? <Alert severity="success">Nota enviada com sucesso!</Alert> : <></>}
+            {/* { success ? <Alert severity="success">Nota enviada com sucesso!</Alert> : <></>} */}
             
             </Stack>
         </>
