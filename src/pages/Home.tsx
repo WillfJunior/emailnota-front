@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import baseUri from '../services/api';
 import Alert from '@mui/material/Alert';
 import { useEffect, useState } from 'react';
-import React from 'react';
+
 
 type Clientes = {
 
