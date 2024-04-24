@@ -21,6 +21,7 @@ export default function Home() {
     const [text, setText] = useState("");
     const [success, setSuccess] = useState(false);
     const [chave, setChave] = useState("");
+    const [textObservacoes, setTextObservacoes] = useState("");
 
 
     useEffect(() => {
@@ -54,6 +55,7 @@ export default function Home() {
         const notas = {
             "clienteId": selectedValue,
             "valor": text,
+            "observacoes" : textObservacoes,
         }
 
         
@@ -121,6 +123,18 @@ export default function Home() {
                 }}
                 value={text}
                 onChange={(event) => setText(event.target.value)}
+
+            />
+            <TextField
+                id="outlined-multiline-static"
+                label="Observações"
+                multiline
+                rows={4}
+                InputLabelProps={{
+                    shrink: true,
+                }}
+                value={textObservacoes}
+                onChange={(event) => setTextObservacoes(event.target.value)}
 
             />
 
