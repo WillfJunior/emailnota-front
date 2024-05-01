@@ -24,6 +24,7 @@ export default function Home() {
     const [textObservacoes, setTextObservacoes] = useState("");
 
 
+
     useEffect(() => {
         GetAllClients();
     }, []);
@@ -73,6 +74,7 @@ export default function Home() {
                 setText('');
                 setSelectedValue('');
                 setChave('');
+                setTextObservacoes('')
                 
     
             })
@@ -81,6 +83,7 @@ export default function Home() {
             });
             setTimeout(() => {
                 setSuccess(false);
+
             }, 3000);
             
             
