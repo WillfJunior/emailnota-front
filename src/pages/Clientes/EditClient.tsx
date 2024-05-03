@@ -1,9 +1,11 @@
 
 import { TextField, Button, Grid } from '@mui/material';
+import AppBar from "../../components/AppBar.tsx";
 
 const EditClient = () => {
     return (
         <div>
+            <AppBar />
             <h1>Editar Cliente</h1>
             <form>
                 <Grid container spacing={2}>

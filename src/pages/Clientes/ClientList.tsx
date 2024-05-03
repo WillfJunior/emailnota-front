@@ -23,6 +23,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import baseUri from "../../services/api.ts";
+import AppBar from "../../components/AppBar.tsx";
 
 
 
@@ -84,6 +85,7 @@ const ClientList = () => {
 
     return (
         <div>
+            <AppBar />
             <h1>Lista de Clientes</h1>
             <Grid container spacing={2} justifyContent="space-between" alignItems="center">
                 <Grid item>
@@ -123,9 +125,7 @@ const ClientList = () => {
                     </TableContainer>
                 </Grid>
             </Grid>
-            <Fab component={Link} to="/add" color="primary" aria-label="add" sx={{ position: 'fixed', bottom: 16, left: 16 }}>
-                <AddIcon />
-            </Fab>
+
             <Dialog open={openDeleteDialog} onClose={handleDeleteCanceled}>
                 <DialogTitle>Confirmar Exclusão</DialogTitle>
                 <DialogContent>

@@ -3,6 +3,7 @@ import { TextField, Button, Grid } from '@mui/material';
 import baseUri from "../../services/api.ts";
 import {ChangeEvent, useState} from "react";
 import { useNavigate } from 'react-router-dom';
+import AppBar from "../../components/AppBar.tsx";
 
 type Cliente = {
     nome: string,
@@ -54,6 +55,7 @@ const AddClient = () => {
 
     return (
         <div>
+            <AppBar />
             <h1>Adicionar Cliente</h1>
             <form onSubmit={handleSubmit}>
                 <Grid container spacing={2}>

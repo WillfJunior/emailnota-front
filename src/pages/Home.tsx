@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import baseUri from '../services/api';
 import Alert from '@mui/material/Alert';
 import { useEffect, useState } from 'react';
+import AppBar from "../components/AppBar.tsx";
 
 
 type Clientes = {
@@ -97,6 +98,7 @@ export default function Home() {
 
     return (
         <>
+            <AppBar />
         <h1>Enviar Email - Emissão de Nota</h1>
         <Stack spacing={5} direction={'column'}>
             
