@@ -49,8 +49,6 @@ const ClientList = () => {
             .then((response) => response.json())
             .then((json) => {
                 setClientes(json)
-
-
             })
             .catch((error) => {
                 console.error(error);
