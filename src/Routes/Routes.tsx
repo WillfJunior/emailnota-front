@@ -1,6 +1,6 @@
 
-import { BrowserRouter as Router, Route} from 'react-router-dom';
-import { Routes as RoutesRoot } from 'react-router'
+import { BrowserRouter as Router, Route, Routes as RoutesRoot } from 'react-router-dom';
+// import { Routes as RoutesRoot } from 'react-router'
 import Home from '../pages/Home.tsx';
 import ClientList from '../pages/Clientes/ClientList.tsx';
 import AddClient from '../pages/Clientes/AddClient.tsx';
