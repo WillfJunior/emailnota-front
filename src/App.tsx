@@ -1,17 +1,8 @@
-
-import './App.css'
+import "./App.css";
 import Routes from "./Routes/Routes.tsx";
 
 function App() {
-
-
-  return (
-    <>
-      <div>
-        <Routes />
-      </div>
-    </>
-  )
+  return <Routes />;
 }
 
-export default App
+export default App;
