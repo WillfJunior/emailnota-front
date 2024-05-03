@@ -1,6 +1,6 @@
 
 import './App.css'
-import Home from './pages/Home'
+import Routes from "./Routes/Routes.tsx";
 
 function App() {
 
@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <div>
-        <Home />
+        <Routes />
       </div>
     </>
   )
