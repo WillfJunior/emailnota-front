@@ -64,7 +64,7 @@ export default function Home() {
         }
 
         
-            fetch(`${baseUri}notass`,{
+            fetch(`${baseUri}notas`,{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
