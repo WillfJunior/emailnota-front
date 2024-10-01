@@ -23,6 +23,7 @@ export default function Home() {
     const [success, setSuccess] = useState(false);
     const [chave, setChave] = useState("");
     const [textObservacoes, setTextObservacoes] = useState("");
+    const [isSending, setIsSending] = useState(false);
 
 
 
@@ -45,7 +46,7 @@ export default function Home() {
     }
     
     function handleEmail() {
-        console.log(import.meta.env.VITE_SECRET)
+        setIsSending(true);
         if(chave !== import.meta.env.VITE_SECRET){
             alert('Chave inválida! \n Email Não enviado....');
             setText('');
@@ -54,6 +55,8 @@ export default function Home() {
             return;
         }
 
+        console.log(isSending)
+
         const notas = {
             "clienteId": selectedValue,
             "valor": text,
@@ -61,7 +64,7 @@ export default function Home() {
         }
 
         
-            fetch(`${baseUri}notas`,{
+            fetch(`${baseUri}notass`,{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -76,8 +79,8 @@ export default function Home() {
                 setSelectedValue('');
                 setChave('');
                 setTextObservacoes('')
-                
-    
+
+
             })
             .catch((error) => {
                 console.error(error);
@@ -86,7 +89,8 @@ export default function Home() {
                 setSuccess(false);
 
             }, 3000);
-            
+            setIsSending(false)
+        console.log(isSending)
             
             
             
@@ -95,6 +99,25 @@ export default function Home() {
         
         
     }
+
+    const dataAtual = new Date();
+
+// Obter o mês e ano atuais
+const mesAtual = dataAtual.getMonth(); // 0-11 (0 para Janeiro, 11 para Dezembro)
+const anoAtual = dataAtual.getFullYear();
+
+// Calcular o mês anterior
+let mesAnterior = mesAtual - 1;
+let anoAnterior = anoAtual;
+
+// Se o mês atual é janeiro (0), então o mês anterior é dezembro (11) do ano anterior
+if (mesAnterior < 0) {
+    mesAnterior = 11; // Dezembro
+    anoAnterior--; // Reduzir o ano
+}
+
+// Formatação do mês anterior para garantir dois dígitos
+const mesAnteriorFormatado = String(mesAnterior + 1).padStart(2, '0');
 
     return (
         <>
@@ -110,7 +133,18 @@ export default function Home() {
                     shrink: true,
                 }}
                 value={selectedValue}
-                onChange={(event) => setSelectedValue(event.target.value)}
+                onChange={(event) => 
+                    {
+                        
+                        setSelectedValue(event.target.value)
+                        console.log(selectedValue)
+                        if(selectedValue.includes('57ac2a21')){
+                            console.log("Teste")
+                            setTextObservacoes(`Gestor: Leandro Santana. Squad: GTF-Experiencia do Cliente. NF referente à ${mesAnteriorFormatado}/${anoAnterior} `)
+                        }else{
+                            setTextObservacoes('')
+                        }
+                    }}
 
             >
                 {clientes.map((option) => (
@@ -155,9 +189,12 @@ export default function Home() {
                     onChange={(event) => setChave(event.target.value)}
             />
 
-            <Button variant="contained" color="success" onClick={handleEmail} >
-                Enviar
-            </Button>
+
+                <Button  variant="contained" color="success" onClick={handleEmail} >
+                    Enviar
+                </Button>
+
+
 
             { success ? <Alert severity="success">Nota enviada com sucesso!</Alert> : <></>}
             
